@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import initialData from './initial-data';
-import Column from './column';
+import Column from './Column';
 
+import '@atlaskit/css-reset';
 import './App.css';
 
 class App extends Component {
