@@ -18,13 +18,26 @@ class App extends Component {
   }
 
   onDragEnd = (result) => {
-    // TODO: reorder our column
-    console.log('onDragEnd')
+    const { destination, source, draggableId } = result;
+
+    if (!destination) return;
+    if ((destination.droppableId === source.droppableId) && (destination.index === source.index)) return;
+
+    const column = this.state.columns[source.droppableId];
+    const newTasksIds = Array.from(column.tasksIds);
+    newTasksIds.splice(source.index, 1);
+    newTasksIds.splice(destination.index, 0, draggableId);
+
+    const newColumn = { ...column, tasksIds: newTasksIds };
+
+    const newState = {
+      ...this.state,
+      columns: { ...this.state.columns, [newColumn.id]: newColumn }
+    }
+
+    this.setState(newState);
   }
-
-
   render() {
-
     return (
       <DragDropContext
         onDragStart={this.onDragStart}
@@ -39,13 +52,6 @@ class App extends Component {
         })}
       </DragDropContext>
     )
-
-
-
-
-
-
-
   }
 }
 
