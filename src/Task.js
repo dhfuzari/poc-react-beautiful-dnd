@@ -9,19 +9,28 @@ const Container = styled.div`
   padding: 8px;
   margin-bottom: 8px;
   background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')}
+  display: flex;
 `;
 
-class Column extends Component {
+const Handle = styled.div`
+  width: 20px;
+  height: 20px;
+  background-color: orange;
+  border-radius: 4px;
+  margin-right: 8px;
+`;
+
+class Task extends Component {
   render() {
     return (
       <Draggable draggableId={this.props.task.id} index={this.props.index}>
         {(provided, snapshot) => (
           <Container
             {...provided.draggableProps}
-            {...provided.dragHandleProps}
             ref={provided.innerRef}
             isDragging={snapshot.isDragging}
           >
+            <Handle {...provided.dragHandleProps} />
             {this.props.task.content}
           </Container>
         )}
@@ -30,4 +39,4 @@ class Column extends Component {
   }
 }
 
-export default Column;
+export default Task;
