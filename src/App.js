@@ -9,15 +9,26 @@ import './App.css';
 class App extends Component {
   state = initialData;
 
-  onDragStart = () => {
-    console.log('onDragStart')
+  onDragStart = (start) => {
+    console.log('onDragStart', start);
+    document.body.style.color = 'orange';
+    document.body.style.transition = 'background-color 0.2s ease';
   }
 
-  onDragUpdate = () => {
-    console.log('onDragUpdate')
+  onDragUpdate = (update) => {
+    console.log('onDragUpdate', update);
+    const { destination } = update;
+    const opacity = destination
+      ? destination.index / Object.keys(this.state.tasks).length
+      : 0
+    document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity})`;
   }
 
   onDragEnd = (result) => {
+    console.log('onDragEnd', result)
+    document.body.style.color = 'inherit';
+    document.body.style.backgroundColor = 'inherit';
+
     const { destination, source, draggableId } = result;
 
     if (!destination) return;
@@ -41,8 +52,8 @@ class App extends Component {
     return (
       <DragDropContext
         onDragStart={this.onDragStart}
-        onDragEnd={this.onDragEnd}
         onDragUpdate={this.onDragUpdate}
+        onDragEnd={this.onDragEnd}
       >
         {this.state.columnOrder.map(columnId => {
           const column = this.state.columns[columnId];
