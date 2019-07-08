@@ -32,7 +32,7 @@ class Column extends Component {
         <Title>{this.props.column.title}</Title>
         <Droppable
           droppableId={this.props.column.id}
-          type={this.props.column.id === 'column-3' ? 'done' : 'active'}
+          isDropDisabled={this.props.isDropDisabled}
         >
           {(provided, snapshot) => (
             <TaskList
