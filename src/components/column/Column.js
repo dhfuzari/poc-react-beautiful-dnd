@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
-import Task from './Task';
+import Task from '../task/';
 
 //TODO: Replace px units by rem unit
 const Container = styled.div`

@@ -1,32 +1,22 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
-import initialData from './initial-data';
-import Column from './Column';
+import initialData from '../../data/initial-data';
+import Column from '../column/';
 
 import '@atlaskit/css-reset';
 import './App.css';
-
-const Container = styled.div`
-  display: flex;
-`;
 
 class App extends Component {
   state = initialData;
 
   onDragStart = (start) => {
-    // Demonstration only
-    console.log('onDragStart', start);
     document.body.style.color = 'orange';
     document.body.style.transition = 'background-color 0.2s ease';
-
     const homeIndex = this.state.columnOrder.indexOf(start.source.droppableId);
     this.setState({ homeIndex });
   }
 
   onDragUpdate = (update) => {
-    // Demonstration only
-    console.log('onDragUpdate', update);
     const { destination } = update;
     const opacity = destination
       ? destination.index / Object.keys(this.state.tasks).length
@@ -36,12 +26,8 @@ class App extends Component {
 
   onDragEnd = (result) => {
     this.setState({ homeIndex: null });
-
-    // Demonstration only
-    console.log('onDragEnd', result)
     document.body.style.color = 'inherit';
     document.body.style.backgroundColor = 'inherit';
-
     const { destination, source, draggableId } = result;
 
     if (!destination) return;
@@ -101,7 +87,7 @@ class App extends Component {
         onDragUpdate={this.onDragUpdate}
         onDragEnd={this.onDragEnd}
       >
-        <Container>
+        <div className="wrapper-columns">
           {this.state.columnOrder.map((columnId, index) => {
             const column = this.state.columns[columnId];
             const tasks = column.tasksIds.map(taskId => this.state.tasks[taskId]);
@@ -109,7 +95,7 @@ class App extends Component {
             const isDropDisabled = index < this.state.homeIndex;
             return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} />
           })}
-        </Container>
+        </div>
       </DragDropContext>
     )
   }
