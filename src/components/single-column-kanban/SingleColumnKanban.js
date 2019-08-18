@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import initialData from '../../data/initial-data';
+import singleColumnKanbanData from '../../data/single-column-kanban-data';
 import Column from '../column';
 
-import './MultColumnsKanban.css';
+import './SingleColumnKanban.css';
 
-class MultColumnsKanban extends Component {
-  state = initialData;
+class SingleColumnKanban extends Component {
+  state = singleColumnKanbanData;
 
   onDragStart = (start) => {
     document.body.style.color = 'orange';
@@ -80,6 +80,7 @@ class MultColumnsKanban extends Component {
     this.setState(newState);
   }
   render() {
+    const { axis } = this.state;
     return (
       <DragDropContext
         onDragStart={this.onDragStart}
@@ -92,7 +93,7 @@ class MultColumnsKanban extends Component {
             const tasks = column.tasksIds.map(taskId => this.state.tasks[taskId]);
 
             const isDropDisabled = index < this.state.homeIndex;
-            return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} />
+            return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} axis={axis} />
           })}
         </div>
       </DragDropContext>
@@ -100,4 +101,4 @@ class MultColumnsKanban extends Component {
   }
 }
 
-export default MultColumnsKanban;
+export default SingleColumnKanban;

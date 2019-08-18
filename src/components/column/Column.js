@@ -3,49 +3,43 @@ import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 import Task from '../task/';
 
-//TODO: Replace px units by rem unit
-const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  width: 220px;
-  display: flex;
-  flex-direction: column;
-`;
+import './Column.css';
 
-const Title = styled.h3`
-  padding: 8px;
+const ColumnContainer = styled.div`
+  width: ${props => (props.axis === 'horizontal' ? 'auto' : '220px')}  
 `;
 
 const TaskList = styled.div`
-  padding: 8px;
-  transition: background-color 0.2s ease;
   background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
-  min-height: 100px;
-  flex-grow: 1;
+  display: ${props => (props.axis === 'horizontal' ? 'flex' : 'initial')}  
+  min-height: ${props => (props.axis === 'horizontal' ? 'initial' : '25vh')}  
 `;
 
 class Column extends Component {
   render() {
+    const { axis } = this.props;
     return (
-      <Container>
-        <Title>{this.props.column.title}</Title>
+      <ColumnContainer className="column-container" axis={axis}>
+        <h2>{this.props.column.title}</h2>
         <Droppable
           droppableId={this.props.column.id}
           isDropDisabled={this.props.isDropDisabled}
+          direction={axis === 'horizontal' ? 'horizontal' : 'vertical'}
         >
           {(provided, snapshot) => (
             <TaskList
               {...provided.droppableProps}
               ref={provided.innerRef}
               isDraggingOver={snapshot.isDraggingOver}
+              className="task-list"
+              axis={axis}
             >
-              {this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} />)}
+              {this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} axis={axis} />)}
               {provided.placeholder}
             </TaskList>
           )}
         </Droppable>
-      </Container>
+      </ColumnContainer>
     )
   }
 }

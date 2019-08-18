@@ -1,0 +1,14 @@
+.task-container {
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    padding: 8px;
+    display: flex;
+}
+
+.handle-task {
+    width: 20px;
+    height: 20px;
+    background-color: orange;
+    border-radius: 4px;
+    margin-right: 8px;
+}

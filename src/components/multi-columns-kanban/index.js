@@ -1,2 +1,2 @@
-import MultColumnsKanban from './multColumnsKanban';
-export default MultColumnsKanban;
+import MultiColumnsKanban from './MultiColumnsKanban';
+export default MultiColumnsKanban;
