@@ -10,9 +10,7 @@ class App extends Component {
     return (
       <Fragment>
         <h2>Multiple columns kanban layout - <small>vertical lists</small></h2><br />
-        <MultiColumnsKanban />
-        <h2>Single column kanban layout - <small>horizontal list</small></h2><br />
-        <SingleColumnKanban />
+        <MultiColumnsKanban />        
       </Fragment>
     )
   }

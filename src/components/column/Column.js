@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 import Task from '../task/';
 
 import './Column.css';
@@ -19,27 +19,40 @@ class Column extends Component {
   render() {
     const { axis } = this.props;
     return (
-      <ColumnContainer className="column-container" axis={axis}>
-        <h2>{this.props.column.title}</h2>
-        <Droppable
-          droppableId={this.props.column.id}
-          isDropDisabled={this.props.isDropDisabled}
-          direction={axis === 'horizontal' ? 'horizontal' : 'vertical'}
-        >
-          {(provided, snapshot) => (
-            <TaskList
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              isDraggingOver={snapshot.isDraggingOver}
-              className="task-list"
-              axis={axis}
+      <Draggable
+        draggableId={this.props.column.id}
+        index={this.props.index}
+      >
+        {(provided) => (
+          <ColumnContainer
+            className="column-container" 
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+            axis={axis}
+          >
+            <h2 {...provided.dragHandleProps}>{this.props.column.title}</h2>
+            <Droppable
+              droppableId={this.props.column.id}
+              isDropDisabled={this.props.isDropDisabled}
+              direction={axis === 'horizontal' ? 'horizontal' : 'vertical'}
+              type="task"
             >
-              {this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} axis={axis} />)}
-              {provided.placeholder}
-            </TaskList>
-          )}
-        </Droppable>
-      </ColumnContainer>
+              {(provided, snapshot) => (
+                <TaskList
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  isDraggingOver={snapshot.isDraggingOver}
+                  className="task-list"
+                  axis={axis}
+                >
+                  {this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} axis={axis} />)}
+                  {provided.placeholder}
+                </TaskList>
+              )}
+            </Droppable>
+          </ColumnContainer>
+        )}
+      </Draggable>
     )
   }
 }
