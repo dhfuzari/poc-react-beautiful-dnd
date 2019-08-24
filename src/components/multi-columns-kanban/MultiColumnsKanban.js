@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import multiColumnsKanbanData from '../../data/multi-columns-kanban-data';
-import Column from '../column';
+import InnerColumnsList from '../inner-columns-list';
 
 import './MultiColumnsKanban.css';
 
@@ -33,7 +33,6 @@ class MultiColumnsKanban extends Component {
     if ((destination.droppableId === source.droppableId) && (destination.index === source.index)) return;
 
     // Check if a column is being reordered
-    console.log(type);
     if(type === 'column') {
       const newColumOrder = Array.from(this.state.columnOrder);
       newColumOrder.splice(source.index, 1);
@@ -96,6 +95,7 @@ class MultiColumnsKanban extends Component {
     this.setState(newState);
   }
   render() {
+    console.log('render MultiColumnsKanban');
     const { axis } = this.state;
     return (
       <DragDropContext
@@ -116,10 +116,8 @@ class MultiColumnsKanban extends Component {
             >
               {this.state.columnOrder.map((columnId, index) => {
                 const column = this.state.columns[columnId];
-                const tasks = column.tasksIds.map(taskId => this.state.tasks[taskId]);
-
                 const isDropDisabled = index < this.state.homeIndex;
-                return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} axis={axis} index={index}/>
+                return <InnerColumnsList key={column.id} column={column} tasksMap={this.state.tasks} axis={axis} index={index} isDropDisabled={isDropDisabled}/>
               })}
               {provided.placeholder}
             </div>

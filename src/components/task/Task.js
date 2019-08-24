@@ -18,6 +18,7 @@ const TaskContainer = styled.div`
 
 class Task extends Component {
   render() {
+    console.log('render Task');
     const { axis } = this.props;
     const isDragDisabled = this.props.task.id === 'task-1'
     return (

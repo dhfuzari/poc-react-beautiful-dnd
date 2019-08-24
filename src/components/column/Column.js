@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import Task from '../task/';
+import InnerTasksList from '../inner-tasks-list';
 
 import './Column.css';
 
@@ -14,9 +14,9 @@ const TaskList = styled.div`
   display: ${props => (props.axis === 'horizontal' ? 'flex' : 'initial')}  
   min-height: ${props => (props.axis === 'horizontal' ? 'initial' : '25vh')}  
 `;
-
 class Column extends Component {
   render() {
+    console.log('render Column');
     const { axis } = this.props;
     return (
       <Draggable
@@ -45,7 +45,7 @@ class Column extends Component {
                   className="task-list"
                   axis={axis}
                 >
-                  {this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} axis={axis} />)}
+                  <InnerTasksList tasks={this.props.tasks} axis={axis} />
                   {provided.placeholder}
                 </TaskList>
               )}

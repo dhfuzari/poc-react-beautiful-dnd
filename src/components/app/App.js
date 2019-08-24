@@ -7,10 +7,11 @@ import './App.css';
 
 class App extends Component {
   render() {
+    console.log('render App');
     return (
       <Fragment>
         <h2>Multiple columns kanban layout - <small>vertical lists</small></h2><br />
-        <MultiColumnsKanban />        
+        <MultiColumnsKanban />
       </Fragment>
     )
   }
