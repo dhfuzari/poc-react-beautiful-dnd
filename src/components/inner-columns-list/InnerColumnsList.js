@@ -9,9 +9,9 @@ class InnerColumnsList extends Component {
         return true;
     }
     render() {
-        const { column, tasksMap, axis, index, isDropDisabled } = this.props;
+        const { column, tasksMap, index, isDropDisabled } = this.props;
         const tasks = column.tasksIds.map(taskId => tasksMap[taskId]);
-        return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} axis={axis} index={index}/>
+        return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} index={index}/>
     }
 }
 

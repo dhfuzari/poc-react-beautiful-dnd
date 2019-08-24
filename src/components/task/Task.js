@@ -13,12 +13,11 @@ const TaskContainer = styled.div`
         ? 'lightgreen'
         : 'white'
   }; 
-  margin: ${props => props.axis === 'horizontal' ? '0 .5rem' : '.5rem 0'} 
+  margin: .5rem 0; 
 `;
 
 class Task extends Component {
   render() {
-    const { axis } = this.props;
     const isDragDisabled = this.props.task.id === 'task-1'
     return (
       <Draggable
@@ -32,7 +31,6 @@ class Task extends Component {
             ref={provided.innerRef}
             isDragging={snapshot.isDragging}
             isDragDisabled={isDragDisabled}
-            axis={axis}
             className="task-container"
           >
             <div className="handle-task" {...provided.dragHandleProps} />

@@ -95,7 +95,6 @@ class MultiColumnsKanban extends Component {
     this.setState(newState);
   }
   render() {
-    const { axis } = this.state;
     return (
       <DragDropContext
         onDragStart={this.onDragStart}
@@ -116,7 +115,7 @@ class MultiColumnsKanban extends Component {
               {this.state.columnOrder.map((columnId, index) => {
                 const column = this.state.columns[columnId];
                 const isDropDisabled = index < this.state.homeIndex;
-                return <InnerColumnsList key={column.id} column={column} tasksMap={this.state.tasks} axis={axis} index={index} isDropDisabled={isDropDisabled}/>
+                return <InnerColumnsList key={column.id} column={column} tasksMap={this.state.tasks} index={index} isDropDisabled={isDropDisabled}/>
               })}
               {provided.placeholder}
             </div>

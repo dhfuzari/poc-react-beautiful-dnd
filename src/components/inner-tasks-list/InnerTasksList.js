@@ -7,7 +7,7 @@ class InnerTasksList extends Component {
       return true;
     }
     render() {
-      return this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} axis={this.props.axis} />)
+      return this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} />)
     }
 }
 

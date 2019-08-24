@@ -80,7 +80,6 @@ class SingleColumnKanban extends Component {
     this.setState(newState);
   }
   render() {
-    const { axis } = this.state;
     return (
       <DragDropContext
         onDragStart={this.onDragStart}
@@ -93,7 +92,7 @@ class SingleColumnKanban extends Component {
             const tasks = column.tasksIds.map(taskId => this.state.tasks[taskId]);
 
             const isDropDisabled = index < this.state.homeIndex;
-            return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} axis={axis} />
+            return <Column key={column.id} column={column} tasks={tasks} isDropDisabled={isDropDisabled} />
           })}
         </div>
       </DragDropContext>

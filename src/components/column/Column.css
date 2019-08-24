@@ -1,4 +1,5 @@
 .column-container {
+    width: 220px;  
     margin: 8px;
     border: 1px solid lightgrey;
     background-color: white;
@@ -12,7 +13,7 @@
 }
 
 .task-list {
+    min-height: 25vh;
     padding: 8px;
     transition: background-color 0.2s ease;
-    flex-grow: 1;
 }
