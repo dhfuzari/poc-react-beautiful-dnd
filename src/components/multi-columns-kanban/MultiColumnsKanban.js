@@ -95,7 +95,6 @@ class MultiColumnsKanban extends Component {
     this.setState(newState);
   }
   render() {
-    console.log('render MultiColumnsKanban');
     const { axis } = this.state;
     return (
       <DragDropContext

@@ -16,7 +16,6 @@ const TaskList = styled.div`
 `;
 class Column extends Component {
   render() {
-    console.log('render Column');
     const { axis } = this.props;
     return (
       <Draggable
