@@ -1,13 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Column from '../column';
 
-class InnerColumnsList extends Component {
-    shouldComponentUpdate(nextProps) {
-        if(nextProps.column === this.props.column &&
-           nextProps.tasksMap === this.props.tasksMap &&
-           nextProps.index === this.props.index) return false;
-        return true;
-    }
+class InnerColumnsList extends PureComponent {
     render() {
         const { column, tasksMap, index, isDropDisabled } = this.props;
         const tasks = column.tasksIds.map(taskId => tasksMap[taskId]);
