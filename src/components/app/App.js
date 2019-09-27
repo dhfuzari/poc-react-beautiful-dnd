@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import MultiColumnsKanban from '../multi-columns-kanban/'
-import SingleColumnKanban from '../single-column-kanban/'
 
 import '@atlaskit/css-reset';
 import './App.css';
